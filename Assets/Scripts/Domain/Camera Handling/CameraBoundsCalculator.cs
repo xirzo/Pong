@@ -12,35 +12,45 @@ namespace Pong.Domain.CameraHandling
             TryGetComponent(out _camera);
         }
 
-        private Vector2 GetCameraBoundaryPoint(float x, float y)
+        private Vector2 GetPoint(float x, float y)
         {
             return new Vector2(_camera.ViewportToWorldPoint(new Vector3(x, y)).x, _camera.ViewportToWorldPoint(new Vector3(x, y)).y);
         }
 
-        public Vector2[] GetCameraBoundaryPoints()
+        public float GetTopY()
+        {
+            return GetPoint(0, 1).y;
+        }
+
+        public float GetBottomY()
+        {
+            return GetPoint(0, 0).y;
+        }
+
+        public Vector2[] GetBoundaryPoints()
         {
             return new Vector2[4]
             {
-                GetCameraBoundaryPoint(0, 0),
-                GetCameraBoundaryPoint(1, 0),
-                GetCameraBoundaryPoint(0, 1),
-                GetCameraBoundaryPoint(1, 1)
+                GetPoint(0, 0),
+                GetPoint(1, 0),
+                GetPoint(0, 1),
+                GetPoint(1, 1)
             };
         }
 
-        public Vector2[] GetCameraVerticalLineBoundaryPoints(float x)
+        public Vector2[] GetVerticalLineBoundaryPoints(float x)
         {
             return new Vector2[2]{
-                GetCameraBoundaryPoint(x, 0),
-                GetCameraBoundaryPoint(x, 1),
+                GetPoint(x, 0),
+                GetPoint(x, 1),
             };
         }
 
-        public Vector2[] GetCameraHorizontalLineBoundaryPoints(float y)
+        public Vector2[] GetHorizontalLineBoundaryPoints(float y)
         {
             return new Vector2[2]{
-                GetCameraBoundaryPoint(0, y),
-                GetCameraBoundaryPoint(1, y),
+                GetPoint(0, y),
+                GetPoint(1, y),
             };
         }
     }
