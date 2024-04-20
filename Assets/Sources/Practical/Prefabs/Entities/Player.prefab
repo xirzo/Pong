@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraBoundsCalculator: {fileID: 0}
+  _speedMultiplier: 0.025
 --- !u!114 &1236011731102928576
 MonoBehaviour:
   m_ObjectHideFlags: 0

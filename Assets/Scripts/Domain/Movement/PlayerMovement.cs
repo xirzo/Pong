@@ -8,8 +8,9 @@ namespace Pong.Domain.Movement
     [RequireComponent(typeof(PlayerInput))]
     public class PlayerMovement : MonoBehaviour
     {
-        private const float SCALE_MULTIPLIER = 1.5f;
+        private const float SCALE_MULTIPLIER = 0.5f;
         [SerializeField] private CameraBoundsCalculator _cameraBoundsCalculator;
+        [SerializeField, Range(0, 1)] private float _speedMultiplier = 0.5f;
         private PlayerInput _input;
         private float _movementInputY;
         private float _boundsY;
@@ -31,14 +32,10 @@ namespace Pong.Domain.Movement
 
         private void Move()
         {
-            var nextPosition = transform.position + (transform.localScale.y * SCALE_MULTIPLIER) * new Vector3(0, _movementInputY / 2);
+            var positionOffset = transform.localScale.y * new Vector3(0, _movementInputY / 2) * _speedMultiplier;
 
-            if (Mathf.Abs(nextPosition.y) >= _boundsY)
-            {
-                return;
-            }
-
-            transform.position = nextPosition;
+            transform.position += positionOffset;
+            transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -(_boundsY - transform.localScale.y * SCALE_MULTIPLIER), _boundsY - transform.localScale.y * SCALE_MULTIPLIER), transform.position.z);
         }
 
         private void Update()
