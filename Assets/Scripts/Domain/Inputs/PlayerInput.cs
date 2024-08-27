@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Pong.Domain.Inputs
 {
+    // TODO: Move to separate layer
     public class PlayerInput : MonoBehaviour
     {
         public InputActions Actions { get; private set; }

@@ -1,8 +1,9 @@
 using UnityEngine;
 
-namespace Pong.Domain.CameraHandling
+namespace Pong.Domain.Bounds
 {
     [RequireComponent(typeof(Camera))]
+    // TODO: Move to separate layer
     public class CameraBoundsCalculator : MonoBehaviour
     {
         private Camera _camera;

@@ -1,5 +1,5 @@
 using System;
-using Pong.Domain.CameraHandling;
+using Pong.Domain.Bounds;
 using Pong.Domain.Inputs;
 using UnityEngine;
 
