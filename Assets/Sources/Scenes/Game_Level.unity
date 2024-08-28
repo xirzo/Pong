@@ -201,7 +201,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
-  _monoInstallers: []
+  _monoInstallers:
+  - {fileID: 277494695}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -228,8 +229,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 277494694}
+  - component: {fileID: 277494695}
   m_Layer: 0
-  m_Name: Camera_Installer
+  m_Name: Camera_Installers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -250,6 +252,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1314962922}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &277494695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277494693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 280e94b977b7bda408d312707ce1b273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cameraBoundsCalculator: {fileID: 519420033}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,10 +720,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 57876204}
     m_Modifications:
-    - target: {fileID: 473025357334469690, guid: eedbc54e309f4b641a028a63c96cf34c, type: 3}
-      propertyPath: _cameraBoundsCalculator
-      value: 
-      objectReference: {fileID: 519420033}
     - target: {fileID: 4510884600730469704, guid: eedbc54e309f4b641a028a63c96cf34c, type: 3}
       propertyPath: m_Name
       value: Player_2
@@ -1025,17 +1036,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 57876204}
     m_Modifications:
-    - target: {fileID: 473025357334469690, guid: eedbc54e309f4b641a028a63c96cf34c, type: 3}
-      propertyPath: _cameraBoundsCalculator
-      value: 
-      objectReference: {fileID: 519420033}
     - target: {fileID: 4510884600730469704, guid: eedbc54e309f4b641a028a63c96cf34c, type: 3}
       propertyPath: m_Name
       value: Player_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6039703591383316481, guid: eedbc54e309f4b641a028a63c96cf34c, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7819609851957945550, guid: eedbc54e309f4b641a028a63c96cf34c, type: 3}
       propertyPath: m_LocalPosition.x
