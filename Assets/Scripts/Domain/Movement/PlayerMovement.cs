@@ -5,36 +5,29 @@ using Zenject;
 
 namespace Pong.Domain.Movement
 {
-	[RequireComponent(typeof(PlayerInput))]
-	public class PlayerMovement : MonoBehaviour
+	public class PlayerMovement : IFixedTickable
 	{
 		private const float SCALE_MULTIPLIER = 0.5f;
-		[SerializeField] [Range(0, 1)] private float _speedMultiplier = 0.5f;
-		private float _boundsY;
-		private CameraBoundsCalculator _cameraBoundsCalculator;
-		private PlayerInput _input;
+		private readonly float _boundsY;
+		private readonly float _speedMultiplier = 0.025f;
+		private readonly Transform _transform;
+		private readonly CameraBoundsCalculator _cameraBoundsCalculator;
+		private readonly PlayerInput _input;
 		private float _movementInputY;
 
-		private void Awake()
+		[Inject]
+		private PlayerMovement(CameraBoundsCalculator cameraBoundsCalculator, PlayerInput input, Transform transform)
 		{
-			TryGetComponent(out _input);
-		}
-
-		private void Start()
-		{
+			_cameraBoundsCalculator = cameraBoundsCalculator;
+			_input = input;
+			_transform = transform;
 			_boundsY = _cameraBoundsCalculator.GetTopY();
 		}
 
-		private void Update()
+		public void FixedTick()
 		{
 			UpdateInput();
 			Move();
-		}
-
-		[Inject]
-		private void Construct(CameraBoundsCalculator cameraBoundsCalculator)
-		{
-			_cameraBoundsCalculator = cameraBoundsCalculator;
 		}
 
 		private void UpdateInput()
@@ -44,12 +37,12 @@ namespace Pong.Domain.Movement
 
 		private void Move()
 		{
-			var positionOffset = transform.localScale.y * new Vector3(0, _movementInputY / 2) * _speedMultiplier;
+			var positionOffset = new Vector3(0, _movementInputY / 2) * (_transform.localScale.y * _speedMultiplier);
 
-			transform.position += positionOffset;
-			transform.position = new Vector3(transform.position.x,
-				Mathf.Clamp(transform.position.y, -(_boundsY - transform.localScale.y * SCALE_MULTIPLIER),
-					_boundsY - transform.localScale.y * SCALE_MULTIPLIER), transform.position.z);
+			_transform.position += positionOffset;
+			_transform.position = new Vector3(_transform.position.x,
+				Mathf.Clamp(_transform.position.y, -(_boundsY - _transform.localScale.y * SCALE_MULTIPLIER),
+					_boundsY - _transform.localScale.y * SCALE_MULTIPLIER), _transform.position.z);
 		}
 	}
 }

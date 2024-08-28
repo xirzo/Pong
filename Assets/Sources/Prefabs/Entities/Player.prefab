@@ -171,8 +171,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7819609851957945550}
-  - component: {fileID: 473025357334469690}
-  - component: {fileID: 1236011731102928576}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -196,29 +194,3 @@ Transform:
   - {fileID: 5216194953547466554}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &473025357334469690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4510884600730469704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 167621050c3bf6d468b826f90217f3ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cameraBoundsCalculator: {fileID: 0}
-  _speedMultiplier: 0.025
---- !u!114 &1236011731102928576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4510884600730469704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c46cc51038cf9944884a94907f8260b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

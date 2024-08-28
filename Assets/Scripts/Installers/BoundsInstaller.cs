@@ -10,7 +10,6 @@ namespace Pong.Installers
 
 		public override void InstallBindings()
 		{
-			Container.Bind<CameraBoundsCalculator>().FromInstance(_cameraBoundsCalculator).AsSingle();
 		}
 	}
 }

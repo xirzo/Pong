@@ -1,27 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
+using Zenject;
 
 namespace Pong.Domain.Inputs
 {
-    // TODO: Move to separate layer
-    public class PlayerInput : MonoBehaviour
-    {
-        public InputActions Actions { get; private set; }
+	// TODO: Move to separate layer
+	public sealed class PlayerInput : IInitializable, IDisposable
+	{
+		public InputActions Actions { get; private set; }
 
-        private void Awake()
-        {
-            Actions = new InputActions();
-        }
+		public void Dispose()
+		{
+			Actions.Dispose();
+		}
 
-        private void OnEnable()
-        {
-            Actions.Enable();
-        }
-
-        private void OnDisable()
-        {
-            Actions.Disable();
-        }
-    }
+		public void Initialize()
+		{
+			Actions = new InputActions();
+			Actions.Enable();
+		}
+	}
 }
