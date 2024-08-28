@@ -161,7 +161,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7819609851957945550}
-  - component: {fileID: 4144973637636647274}
+  - component: {fileID: 1565093755060931580}
   - component: {fileID: 1128104732579230937}
   m_Layer: 0
   m_Name: Ball
@@ -186,7 +186,7 @@ Transform:
   - {fileID: 5216194953547466554}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4144973637636647274
+--- !u!114 &1565093755060931580
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -195,16 +195,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4510884600730469704}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84f2cb92883470840bbd2d8f64fb4995, type: 3}
+  m_Script: {fileID: 11500000, guid: c2bce212f4777144db3156d8305e7d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
-  _maxSpeed: 10
-  _maximumVelocity: 100
-  _hitSpeedMultiplier: 1.25
-  _repulseLayer:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!50 &1128104732579230937
 Rigidbody2D:
   serializedVersion: 4

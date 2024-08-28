@@ -1,77 +1,64 @@
-using System;
-using Pong.Domain.Score;
 using UnityEngine;
+using Zenject;
 using Random = UnityEngine.Random;
 
 namespace Pong.Domain.Movement
 {
-	[RequireComponent(typeof(Rigidbody2D))]
-	public class BallMovement : MonoBehaviour, ILoser
+	public class BallMovement : IInitializable, IFixedTickable
 	{
-		[SerializeField] [Min(0)] private float _speed = 100f;
-		[SerializeField] [Min(0)] private float _maxSpeed = 350f;
-		[SerializeField] [Min(0)] private float _maximumVelocity = 10f;
-		[Space] [SerializeField] [Min(0)] private float _hitSpeedMultiplier = 1.25f;
-		[Space] [SerializeField] private LayerMask _repulseLayer;
+		private readonly float _speed = 100f;
+		private readonly float _maximumVelocity = 10f;
+
+		private readonly Rigidbody2D _rigidbody;
+
 		private Vector2 _direction;
-
-
-		private Rigidbody2D _rigidbody;
-
-		private Vector2 _startPosition;
 		private Vector2 _velocity;
 
-		private void Awake()
+		public BallMovement(float speed, float maximumVelocity,
+			Rigidbody2D rigidbody)
 		{
-			TryGetComponent(out _rigidbody);
-
-			_startPosition = transform.position;
-			SetRandomDirection();
+			_speed = speed;
+			_maximumVelocity = maximumVelocity;
+			_rigidbody = rigidbody;
 		}
 
-		private void FixedUpdate()
+		public void FixedTick()
 		{
 			Move();
 		}
 
-		private void OnCollisionEnter2D(Collision2D other)
+		public void Initialize()
 		{
-			OnCollide?.Invoke();
-
-			if (((1 << other.gameObject.layer) & _repulseLayer) == 0) return;
-
-			CalculateReflectionAndSetDirection(other.contacts[0].normal);
-		}
-
-		private void OnDrawGizmos()
-		{
-			if (Application.isPlaying == false)
-				return;
-
-			Gizmos.color = Color.green;
-			Gizmos.DrawRay(transform.position, _direction);
-		}
-
-		public void Reset()
-		{
-			transform.position = _startPosition;
-			_velocity = Vector3.zero;
 			SetRandomDirection();
 		}
 
-		private void SetRandomDirection()
+		public void ResetVelocity()
+		{
+			_velocity = Vector3.zero;
+		}
+
+		public void SetRandomDirection()
 		{
 			var x = Random.Range(-1f, 1f);
 			var y = Random.Range(-1f, 1f);
 			_direction = new Vector2(x, y).normalized;
 		}
 
-		public event Action OnCollide;
+		// private void OnCollisionEnter2D(Collision2D other)
+		// {
+		// 	OnCollide?.Invoke();
+		//
+		// 	if (((1 << other.gameObject.layer) & _repulseLayer) == 0) return;
+		//
+		// 	CalculateReflectionAndSetDirection(other.contacts[0].normal);
+		// }
+		//
+		// public event Action OnCollide;
 
-		private void CalculateReflectionAndSetDirection(Vector2 normal)
-		{
-			_direction = Vector2.Reflect(_direction, normal);
-		}
+		// private void CalculateReflectionAndSetDirection(Vector2 normal)
+		// {
+		// 	_direction = Vector2.Reflect(_direction, normal);
+		// }
 
 		private void Move()
 		{
