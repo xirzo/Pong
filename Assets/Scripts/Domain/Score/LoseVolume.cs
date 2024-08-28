@@ -1,4 +1,3 @@
-using Pong.Domain.Movement;
 using UnityEngine;
 
 namespace Pong.Domain.Score
@@ -9,8 +8,9 @@ namespace Pong.Domain.Score
 
 		private void OnCollisionEnter2D(Collision2D other)
 		{
-			if (other.gameObject.TryGetComponent(out BallMovement ballMovement) == false) return;
+			if (other.gameObject.TryGetComponent(out ILoser loser) == false) return;
 
+			loser.Reset();
 			_scoreCounter.Increase();
 		}
 

@@ -1,11 +1,12 @@
 using System;
+using Pong.Domain.Score;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Pong.Domain.Movement
 {
 	[RequireComponent(typeof(Rigidbody2D))]
-	public class BallMovement : MonoBehaviour
+	public class BallMovement : MonoBehaviour, ILoser
 	{
 		[SerializeField] [Min(0)] private float _speed = 100f;
 		[SerializeField] [Min(0)] private float _maxSpeed = 350f;
@@ -40,7 +41,6 @@ namespace Pong.Domain.Movement
 
 			if (((1 << other.gameObject.layer) & _repulseLayer) == 0) return;
 
-			// _velocity *= _hitSpeedMultiplier;
 			CalculateReflectionAndSetDirection(other.contacts[0].normal);
 		}
 
@@ -51,6 +51,13 @@ namespace Pong.Domain.Movement
 
 			Gizmos.color = Color.green;
 			Gizmos.DrawRay(transform.position, _direction);
+		}
+
+		public void Reset()
+		{
+			transform.position = _startPosition;
+			_velocity = Vector3.zero;
+			SetRandomDirection();
 		}
 
 		private void SetRandomDirection()
