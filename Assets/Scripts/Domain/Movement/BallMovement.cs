@@ -13,19 +13,18 @@ namespace Pong.Domain.Movement
 		[SerializeField] [Min(0)] private float _maximumVelocity = 10f;
 		[Space] [SerializeField] [Min(0)] private float _hitSpeedMultiplier = 1.25f;
 		[Space] [SerializeField] private LayerMask _repulseLayer;
-		private Vector2 _defaultVelocity;
-
 		private Vector2 _direction;
 
+
 		private Rigidbody2D _rigidbody;
+
 		private Vector2 _startPosition;
 		private Vector2 _velocity;
-
-		// FIXME: MOVEMENT VELOCITY IS INCONSISTENT
 
 		private void Awake()
 		{
 			TryGetComponent(out _rigidbody);
+
 			_startPosition = transform.position;
 			SetRandomDirection();
 		}
@@ -64,7 +63,7 @@ namespace Pong.Domain.Movement
 		{
 			var x = Random.Range(-1f, 1f);
 			var y = Random.Range(-1f, 1f);
-			_direction = new Vector2(x, y);
+			_direction = new Vector2(x, y).normalized;
 		}
 
 		public event Action OnCollide;
