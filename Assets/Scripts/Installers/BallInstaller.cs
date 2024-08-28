@@ -1,5 +1,6 @@
 using Pong.Domain.Entities;
 using Pong.Domain.Movement;
+using Pong.View.Sound;
 using UnityEngine;
 using Zenject;
 
@@ -9,6 +10,8 @@ namespace Pong.Installers
 	{
 		[SerializeField] private Ball _ball;
 		[SerializeField] private Rigidbody2D _rigidbody;
+		[SerializeField] private AudioClip _hitSound;
+		[SerializeField] private AudioSource _ballAudioSource;
 
 		[Space] [SerializeField] private float _speed = 100f;
 
@@ -22,6 +25,8 @@ namespace Pong.Installers
 			Container.BindInterfacesAndSelfTo<BallMovement>().FromInstance(_ballMovement).AsSingle();
 			_ball.Construct(_ballMovement);
 			Container.Bind<Ball>().FromInstance(_ball).AsSingle();
+			Container.BindInterfacesAndSelfTo<BallHitSound>().AsSingle()
+				.WithArguments(_ballAudioSource, _ball, _hitSound);
 		}
 	}
 }

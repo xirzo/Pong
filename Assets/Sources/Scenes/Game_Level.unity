@@ -431,6 +431,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ball: {fileID: 1383575220}
   _rigidbody: {fileID: 1383575221}
+  _hitSound: {fileID: 8300000, guid: 40fb3244636d60e4aab5aa3cd9394542, type: 3}
+  _ballAudioSource: {fileID: 1383575222}
   _speed: 100
   _maximumVelocity: 10
 --- !u!1 &336407755
@@ -1376,6 +1378,11 @@ MonoBehaviour:
 --- !u!50 &1383575221 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 1128104732579230937, guid: 5d70bd2066807294c90a8f3f7390eee0, type: 3}
+  m_PrefabInstance: {fileID: 1383575218}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1383575222 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 744066377685808875, guid: 5d70bd2066807294c90a8f3f7390eee0, type: 3}
   m_PrefabInstance: {fileID: 1383575218}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1424452593
