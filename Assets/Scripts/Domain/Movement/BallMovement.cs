@@ -40,7 +40,7 @@ namespace Pong.Domain.Movement
 
 			if (((1 << other.gameObject.layer) & _repulseLayer) == 0) return;
 
-			_velocity *= _hitSpeedMultiplier;
+			// _velocity *= _hitSpeedMultiplier;
 			CalculateReflectionAndSetDirection(other.contacts[0].normal);
 		}
 
