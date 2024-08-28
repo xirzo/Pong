@@ -7,15 +7,21 @@ namespace Pong.Domain.Movement
 	[RequireComponent(typeof(Rigidbody2D))]
 	public class BallMovement : MonoBehaviour
 	{
-		[SerializeField] [Min(0)] private float _speed = 1f;
+		[SerializeField] [Min(0)] private float _speed = 100f;
+		[SerializeField] [Min(0)] private float _maxSpeed = 350f;
 		[SerializeField] [Min(0)] private float _maximumVelocity = 10f;
+		[SerializeField] [Min(0)] private float _bounciness = 0.7f;
 		[Space] [SerializeField] [Min(0)] private float _hitSpeedMultiplier = 1f;
+		[Space] [SerializeField] private LayerMask _repulseLayer;
+		[SerializeField] [Min(0)] private float _speedHitMultiplier = 5f;
 
 		private Vector2 _direction;
 
 		private Rigidbody2D _rigidbody;
 		private Vector2 _startPosition;
 		private Vector2 _velocity;
+
+		// FIXME: MOVEMENT VELOCITY IS INCONSISTENT
 
 		private void Awake()
 		{
@@ -29,11 +35,14 @@ namespace Pong.Domain.Movement
 			Move();
 		}
 
-		private void OnCollisionEnter2D(Collision2D collision)
+		private void OnCollisionEnter2D(Collision2D other)
 		{
 			OnCollide?.Invoke();
 
-			// if (collision.gameObject.TryGetComponent(out Repulsor repulsor)) SetDirection(collision);
+			if (((1 << other.gameObject.layer) & _repulseLayer) == 0) return;
+
+			_velocity *= _speedHitMultiplier;
+			CalculateReflectionAndSetDirection(other.contacts[0].normal);
 		}
 
 		private void OnDrawGizmos()
@@ -54,15 +63,9 @@ namespace Pong.Domain.Movement
 
 		public event Action OnCollide;
 
-		public void SetDirection(Vector2 normal)
+		private void CalculateReflectionAndSetDirection(Vector2 normal)
 		{
 			_direction = Vector2.Reflect(_direction, normal * _hitSpeedMultiplier);
-		}
-
-		public void SetDirection(Collision2D collision)
-		{
-			var normal = collision.contacts[0].normal;
-			SetDirection(normal);
 		}
 
 		private void Move()
