@@ -44,21 +44,10 @@ namespace Pong.Domain.Movement
 			_direction = new Vector2(x, y).normalized;
 		}
 
-		// private void OnCollisionEnter2D(Collision2D other)
-		// {
-		// 	OnCollide?.Invoke();
-		//
-		// 	if (((1 << other.gameObject.layer) & _repulseLayer) == 0) return;
-		//
-		// 	CalculateReflectionAndSetDirection(other.contacts[0].normal);
-		// }
-		//
-		// public event Action OnCollide;
-
-		// private void CalculateReflectionAndSetDirection(Vector2 normal)
-		// {
-		// 	_direction = Vector2.Reflect(_direction, normal);
-		// }
+		public void CalculateReflectionAndSetDirection(Vector2 normal)
+		{
+			_direction = Vector2.Reflect(_direction, normal);
+		}
 
 		private void Move()
 		{
