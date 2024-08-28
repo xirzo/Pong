@@ -300,6 +300,8 @@ MonoBehaviour:
   _loseVolume: {fileID: 4252897035644515526}
   _player: {fileID: 2135632046}
   _textfield: {fileID: 1123960022}
+  _loseSound: {fileID: 8300000, guid: 1e2087504bb2afa4189a7bc6e550dc3f, type: 3}
+  _loseAudioSource: {fileID: 1951378045}
 --- !u!1 &262704561
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,6 +350,8 @@ MonoBehaviour:
   _loseVolume: {fileID: 502747776}
   _player: {fileID: 1424452594}
   _textfield: {fileID: 2135997062}
+  _loseSound: {fileID: 8300000, guid: 1e2087504bb2afa4189a7bc6e550dc3f, type: 3}
+  _loseAudioSource: {fileID: 4252897035644515528}
 --- !u!114 &262704565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1490,6 +1494,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2770438233273357938, guid: 953113bedcdd90646ac15120943388bc, type: 3}
   m_PrefabInstance: {fileID: 3450998408947216808}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &1951378045 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9109784072534638411, guid: 1e04eaf5b8ddba14396279838aff438a, type: 3}
+  m_PrefabInstance: {fileID: 502747774}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2049743539
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1750,6 +1759,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9e92f3ea1cf62744a1e808ec0e4a215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &4252897035644515528 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9109784072534638411, guid: 1e04eaf5b8ddba14396279838aff438a, type: 3}
+  m_PrefabInstance: {fileID: 4252897035644515525}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

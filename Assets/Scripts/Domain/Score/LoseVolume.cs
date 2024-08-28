@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Pong.Domain.Score
@@ -12,7 +13,10 @@ namespace Pong.Domain.Score
 
 			loser.Reset();
 			_scoreCounter.Increase();
+			OnLose?.Invoke();
 		}
+
+		public event Action OnLose;
 
 		public void Construct(ScoreCounter scoreCounter)
 		{
