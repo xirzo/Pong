@@ -188,7 +188,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4510884600730469704}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -208,15 +208,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f2cb92883470840bbd2d8f64fb4995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 350
-  _maxSpeed: 350
-  _maximumVelocity: 10
-  _bounciness: 0.7
-  _hitSpeedMultiplier: 1
+  _speed: 5
+  _maxSpeed: 10
+  _maximumVelocity: 100
+  _hitSpeedMultiplier: 1.25
   _repulseLayer:
     serializedVersion: 2
     m_Bits: 256
-  _speedHitMultiplier: 5
 --- !u!50 &1128104732579230937
 Rigidbody2D:
   serializedVersion: 4

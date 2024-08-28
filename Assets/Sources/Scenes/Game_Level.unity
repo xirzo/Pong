@@ -547,18 +547,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 57876204}
     m_Modifications:
-    - target: {fileID: 4144973637636647274, guid: 5d70bd2066807294c90a8f3f7390eee0, type: 3}
-      propertyPath: _maximumVelocity
-      value: 49.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4144973637636647274, guid: 5d70bd2066807294c90a8f3f7390eee0, type: 3}
-      propertyPath: _hitSpeedMultiplier
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4144973637636647274, guid: 5d70bd2066807294c90a8f3f7390eee0, type: 3}
-      propertyPath: _speedHitMultiplier
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 4510884600730469704, guid: 5d70bd2066807294c90a8f3f7390eee0, type: 3}
       propertyPath: m_Name
       value: Ball

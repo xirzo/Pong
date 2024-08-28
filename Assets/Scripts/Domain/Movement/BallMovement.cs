@@ -10,10 +10,8 @@ namespace Pong.Domain.Movement
 		[SerializeField] [Min(0)] private float _speed = 100f;
 		[SerializeField] [Min(0)] private float _maxSpeed = 350f;
 		[SerializeField] [Min(0)] private float _maximumVelocity = 10f;
-		[SerializeField] [Min(0)] private float _bounciness = 0.7f;
-		[Space] [SerializeField] [Min(0)] private float _hitSpeedMultiplier = 1f;
+		[Space] [SerializeField] [Min(0)] private float _hitSpeedMultiplier = 1.25f;
 		[Space] [SerializeField] private LayerMask _repulseLayer;
-		[SerializeField] [Min(0)] private float _speedHitMultiplier = 5f;
 
 		private Vector2 _direction;
 
@@ -41,7 +39,7 @@ namespace Pong.Domain.Movement
 
 			if (((1 << other.gameObject.layer) & _repulseLayer) == 0) return;
 
-			_velocity *= _speedHitMultiplier;
+			_velocity *= _hitSpeedMultiplier;
 			CalculateReflectionAndSetDirection(other.contacts[0].normal);
 		}
 
@@ -70,7 +68,7 @@ namespace Pong.Domain.Movement
 
 		private void Move()
 		{
-			_velocity = _direction * (_speed * Time.deltaTime);
+			_velocity = _direction * _speed;
 
 			_rigidbody.velocity = Vector2.ClampMagnitude(_velocity, _maximumVelocity);
 		}
