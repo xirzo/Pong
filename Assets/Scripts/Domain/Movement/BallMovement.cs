@@ -12,6 +12,7 @@ namespace Pong.Domain.Movement
 		[SerializeField] [Min(0)] private float _maximumVelocity = 10f;
 		[Space] [SerializeField] [Min(0)] private float _hitSpeedMultiplier = 1.25f;
 		[Space] [SerializeField] private LayerMask _repulseLayer;
+		private Vector2 _defaultVelocity;
 
 		private Vector2 _direction;
 
@@ -63,7 +64,7 @@ namespace Pong.Domain.Movement
 
 		private void CalculateReflectionAndSetDirection(Vector2 normal)
 		{
-			_direction = Vector2.Reflect(_direction, normal * _hitSpeedMultiplier);
+			_direction = Vector2.Reflect(_direction, normal);
 		}
 
 		private void Move()

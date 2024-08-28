@@ -3,8 +3,6 @@ using Zenject;
 
 namespace Pong.Domain.Bounds
 {
-	[RequireComponent(typeof(Camera))]
-	// TODO: Move to separate layer
 	public sealed class CameraBoundsCalculator
 	{
 		private readonly Camera _camera;

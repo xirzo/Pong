@@ -9,7 +9,7 @@ namespace Pong.Domain.Movement
 	{
 		private const float SCALE_MULTIPLIER = 0.5f;
 		private readonly float _boundsY;
-		private readonly float _speedMultiplier = 0.025f;
+		private readonly float _speedMultiplier = 0.07f;
 		private readonly Transform _transform;
 		private readonly CameraBoundsCalculator _cameraBoundsCalculator;
 		private readonly PlayerInput _input;
