@@ -2,7 +2,7 @@ using Pong.Domain.Bounds;
 using Pong.Domain.Inputs;
 using Pong.Domain.Movement;
 using Pong.Domain.Score;
-using Pong.UI;
+using Pong.View.UI;
 using TMPro;
 using UnityEngine;
 using Zenject;

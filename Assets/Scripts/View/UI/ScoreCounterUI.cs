@@ -3,7 +3,7 @@ using Pong.Domain.Score;
 using TMPro;
 using Zenject;
 
-namespace Pong.UI
+namespace Pong.View.UI
 {
 	public class ScoreCounterUI : IDisposable
 	{
