@@ -90,7 +90,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!1 &5240522540777968773
 GameObject:
@@ -102,7 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 306848443699723183}
   - component: {fileID: 4477631308096658702}
-  - component: {fileID: 596971902204118693}
+  - component: {fileID: 3993672197680855148}
   m_Layer: 0
   m_Name: platfiorm
   m_TagString: Untagged
@@ -180,8 +180,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &596971902204118693
-BoxCollider2D:
+--- !u!70 &3993672197680855148
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -215,14 +215,5 @@ BoxCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 0.5625}
-    newSize: {x: 0.64, y: 0.18}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1.8903606, y: 0.37757292}
-  m_EdgeRadius: 0
+  m_Size: {x: 1.91, y: 0.42}
+  m_Direction: 1
