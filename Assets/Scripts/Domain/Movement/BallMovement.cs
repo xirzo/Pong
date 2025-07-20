@@ -9,6 +9,9 @@ namespace Pong.Domain.Movement
 		private readonly float _speed = 100f;
 		private readonly float _maximumVelocity = 10f;
 
+		private const float MinAngle = -35f;
+		private const float MaxAngle = 30f;
+
 		private readonly Rigidbody2D _rigidbody;
 
 		private Vector2 _direction;
@@ -39,9 +42,13 @@ namespace Pong.Domain.Movement
 
 		public void SetRandomDirection()
 		{
-			var x = Random.Range(-1f, 1f);
-			var y = Random.Range(-1f, 1f);
-			_direction = new Vector2(x, y).normalized;
+			var randomAngle = Random.Range(MinAngle, MaxAngle);
+			var angleRad =  randomAngle * Mathf.Deg2Rad;
+			var direction = new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
+
+			direction.x *= Random.value;
+
+			_direction = direction.normalized;
 		}
 
 		public void CalculateReflectionAndSetDirection(Vector2 normal)
