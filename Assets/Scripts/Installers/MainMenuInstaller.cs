@@ -13,6 +13,7 @@ namespace Pong.Installers
         [SerializeField] private Button exitButton;
         [Space]
         [SerializeField] private Button settingsBackButton;
+        [SerializeField] private Scrollbar scrollbar;
         [Space]
         [SerializeField] private StringMenuDictionary menus;
 
@@ -22,7 +23,7 @@ namespace Pong.Installers
             Container.Bind<SceneLoader>().AsSingle();
             Container.BindInterfacesAndSelfTo<MenuStarter>().AsSingle();
             Container.BindInterfacesAndSelfTo<MainMenuUI>().AsSingle().WithArguments(playButton, settingsButton, exitButton);
-            Container.BindInterfacesAndSelfTo<SettingsMenuUI>().AsSingle().WithArguments(settingsBackButton);
+            Container.BindInterfacesAndSelfTo<SettingsMenuUI>().AsSingle().WithArguments(settingsBackButton, scrollbar);
         }
     }
 }

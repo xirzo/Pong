@@ -26,5 +26,10 @@ namespace Pong.Domain.Music
         {
             _audioSource.Pause();
         }
+        
+        public void SetVolume(float volume)
+        {
+            _audioSource.volume = volume;
+        }
     }
 }
