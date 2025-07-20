@@ -1,5 +1,6 @@
 using Pong.Domain.Scenes;
 using Pong.View.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -14,6 +15,8 @@ namespace Pong.Installers
         [Space]
         [SerializeField] private Button settingsBackButton;
         [SerializeField] private Scrollbar scrollbar;
+        [SerializeField] private Toggle toggle;
+        [SerializeField] private TMP_Dropdown resolutionDropdown;
         [Space]
         [SerializeField] private StringMenuDictionary menus;
 
@@ -23,7 +26,7 @@ namespace Pong.Installers
             Container.Bind<SceneLoader>().AsSingle();
             Container.BindInterfacesAndSelfTo<MenuStarter>().AsSingle();
             Container.BindInterfacesAndSelfTo<MainMenuUI>().AsSingle().WithArguments(playButton, settingsButton, exitButton);
-            Container.BindInterfacesAndSelfTo<SettingsMenuUI>().AsSingle().WithArguments(settingsBackButton, scrollbar);
+            Container.BindInterfacesAndSelfTo<SettingsMenuUI>().AsSingle().WithArguments(settingsBackButton, scrollbar, toggle, resolutionDropdown);
         }
     }
 }
