@@ -53,7 +53,7 @@ namespace Pong.Domain.Movement
 		{
 			_velocity = _direction * _speed;
 
-			_rigidbody.velocity = Vector2.ClampMagnitude(_velocity, _maximumVelocity);
+			_rigidbody.linearVelocity = Vector2.ClampMagnitude(_velocity, _maximumVelocity);
 		}
 	}
 }
