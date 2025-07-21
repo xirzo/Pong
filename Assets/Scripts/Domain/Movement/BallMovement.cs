@@ -12,33 +12,45 @@ namespace Pong.Domain.Movement
         private const float MinAngle = -35f;
         private const float MaxAngle = 30f;
         private const float MinHorizontalComponent = 0.5f;
+        private const float MaxVerticalAngle = 75f; 
+        private const float SpeedDecay = 0.98f;
+        private const float MinSpeed = 50f; 
+        private const float MaxSpeed = 150f;
 
         private readonly Rigidbody2D _rigidbody;
 
         private Vector2 _direction;
-        private Vector2 _velocity;
+        private float _currentSpeed;
+        private bool _isInitialized;
 
-        public BallMovement(float speed, float maximumVelocity,
-            Rigidbody2D rigidbody)
+        public BallMovement(float speed, float maximumVelocity, Rigidbody2D rigidbody)
         {
             _speed = speed;
             _maximumVelocity = maximumVelocity;
             _rigidbody = rigidbody;
+            _currentSpeed = speed;
         }
 
         public void FixedTick()
         {
-            Move();
+            if (_isInitialized)
+            {
+                Move();
+            }
         }
 
         public void Initialize()
         {
+            _currentSpeed = _speed;
+            _isInitialized = false;
             SetRandomDirection();
+            _isInitialized = true;
         }
 
         public void ResetVelocity()
         {
-            _velocity = Vector3.zero;
+            _rigidbody.linearVelocity = Vector2.zero;
+            _currentSpeed = _speed;
         }
 
         public void SetRandomDirection()
@@ -62,19 +74,64 @@ namespace Pong.Domain.Movement
                 direction.x = -direction.x;
             }
             
-            _direction = direction;
+            _direction = direction.normalized;
         }
 
         public void CalculateReflectionAndSetDirection(Vector2 normal)
         {
-            _direction = Vector2.Reflect(_direction, normal);
+            normal = normal.normalized;
+            
+            var reflected = Vector2.Reflect(_direction.normalized, normal);
+            
+            var angle = Mathf.Atan2(reflected.y, Mathf.Abs(reflected.x)) * Mathf.Rad2Deg;
+            if (angle > MaxVerticalAngle)
+            {
+                var clampedAngle = MaxVerticalAngle * Mathf.Deg2Rad;
+                var signX = Mathf.Sign(reflected.x);
+                var signY = Mathf.Sign(reflected.y);
+                
+                reflected = new Vector2(
+                    signX * Mathf.Cos(clampedAngle),
+                    signY * Mathf.Sin(clampedAngle)
+                );
+            }
+            
+            if (Mathf.Abs(reflected.x) < MinHorizontalComponent)
+            {
+                reflected.x = MinHorizontalComponent * Mathf.Sign(reflected.x);
+                reflected = reflected.normalized;
+            }
+            
+            _direction = reflected.normalized;
+            
+            _currentSpeed = Mathf.Clamp(_currentSpeed * 1.02f, MinSpeed, MaxSpeed);
+        }
+
+        public void OnWallHit()
+        {
+            _currentSpeed = Mathf.Max(_currentSpeed * SpeedDecay, MinSpeed);
         }
 
         private void Move()
         {
-            _velocity = _direction * _speed;
+            var targetVelocity = _direction * _currentSpeed;
+            
+            var clampedVelocity = Vector2.ClampMagnitude(targetVelocity, _maximumVelocity);
+            
+            _rigidbody.linearVelocity = clampedVelocity;
+            
+            if (_rigidbody.linearVelocity.magnitude > 0.1f)
+            {
+                _direction = _rigidbody.linearVelocity.normalized;
+            }
+        }
 
-            _rigidbody.linearVelocity = Vector2.ClampMagnitude(_velocity, _maximumVelocity);
+        public Vector2 GetCurrentDirection() => _direction;
+        public float GetCurrentSpeed() => _currentSpeed;
+        
+        public void SetSpeed(float newSpeed)
+        {
+            _currentSpeed = Mathf.Clamp(newSpeed, MinSpeed, MaxSpeed);
         }
     }
 }
