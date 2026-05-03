@@ -39,7 +39,7 @@ namespace Pong.View.UI
         
         private void OnPlayButtonClicked()
         {
-            _sceneLoader.LoadNext();
+            _sceneLoader.LoadScene(new SceneLoadRequest("Game_Level"));
         }
 
         private void OnSettingsButtonClicked()
