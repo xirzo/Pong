@@ -91,13 +91,22 @@ namespace Pong.Domain.Inputs
     ""name"": ""InputActions"",
     ""maps"": [
         {
-            ""name"": ""Player"",
+            ""name"": ""Players"",
             ""id"": ""84aacfba-928d-4901-b61c-0838d0c36ade"",
             ""actions"": [
                 {
-                    ""name"": ""Movement"",
+                    ""name"": ""LeftMovement"",
                     ""type"": ""Value"",
                     ""id"": ""9359c3ac-dbeb-44e7-a037-f967c7c4eae1"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""RightMovement"",
+                    ""type"": ""Value"",
+                    ""id"": ""0aa0381d-8e3c-477a-90dd-59437848f48c"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -112,7 +121,7 @@ namespace Pong.Domain.Inputs
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""LeftMovement"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -123,7 +132,7 @@ namespace Pong.Domain.Inputs
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""LeftMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -134,7 +143,51 @@ namespace Pong.Domain.Inputs
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""LeftMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8e549d32-633b-48fa-8166-5d51565ec678"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Keyboard"",
+                    ""id"": ""35a36c9f-d81e-4910-af48-14280bb3adba"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightMovement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""587dc373-6948-403a-9ecd-4db190c0d90d"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""5a62a9d1-1404-4189-bffa-58144ab59f8d"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -143,14 +196,15 @@ namespace Pong.Domain.Inputs
     ],
     ""controlSchemes"": []
 }");
-            // Player
-            m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-            m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
+            // Players
+            m_Players = asset.FindActionMap("Players", throwIfNotFound: true);
+            m_Players_LeftMovement = m_Players.FindAction("LeftMovement", throwIfNotFound: true);
+            m_Players_RightMovement = m_Players.FindAction("RightMovement", throwIfNotFound: true);
         }
 
         ~@InputActions()
         {
-            UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputActions.Player.Disable() has not been called.");
+            UnityEngine.Debug.Assert(!m_Players.enabled, "This will cause a leak and performance issues, InputActions.Players.Disable() has not been called.");
         }
 
         /// <summary>
@@ -223,29 +277,34 @@ namespace Pong.Domain.Inputs
             return asset.FindBinding(bindingMask, out action);
         }
 
-        // Player
-        private readonly InputActionMap m_Player;
-        private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-        private readonly InputAction m_Player_Movement;
+        // Players
+        private readonly InputActionMap m_Players;
+        private List<IPlayersActions> m_PlayersActionsCallbackInterfaces = new List<IPlayersActions>();
+        private readonly InputAction m_Players_LeftMovement;
+        private readonly InputAction m_Players_RightMovement;
         /// <summary>
-        /// Provides access to input actions defined in input action map "Player".
+        /// Provides access to input actions defined in input action map "Players".
         /// </summary>
-        public struct PlayerActions
+        public struct PlayersActions
         {
             private @InputActions m_Wrapper;
 
             /// <summary>
             /// Construct a new instance of the input action map wrapper class.
             /// </summary>
-            public PlayerActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+            public PlayersActions(@InputActions wrapper) { m_Wrapper = wrapper; }
             /// <summary>
-            /// Provides access to the underlying input action "Player/Movement".
+            /// Provides access to the underlying input action "Players/LeftMovement".
             /// </summary>
-            public InputAction @Movement => m_Wrapper.m_Player_Movement;
+            public InputAction @LeftMovement => m_Wrapper.m_Players_LeftMovement;
+            /// <summary>
+            /// Provides access to the underlying input action "Players/RightMovement".
+            /// </summary>
+            public InputAction @RightMovement => m_Wrapper.m_Players_RightMovement;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
-            public InputActionMap Get() { return m_Wrapper.m_Player; }
+            public InputActionMap Get() { return m_Wrapper.m_Players; }
             /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
             public void Enable() { Get().Enable(); }
             /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
@@ -253,9 +312,9 @@ namespace Pong.Domain.Inputs
             /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
             public bool enabled => Get().enabled;
             /// <summary>
-            /// Implicitly converts an <see ref="PlayerActions" /> to an <see ref="InputActionMap" /> instance.
+            /// Implicitly converts an <see ref="PlayersActions" /> to an <see ref="InputActionMap" /> instance.
             /// </summary>
-            public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+            public static implicit operator InputActionMap(PlayersActions set) { return set.Get(); }
             /// <summary>
             /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
             /// </summary>
@@ -263,14 +322,17 @@ namespace Pong.Domain.Inputs
             /// <remarks>
             /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
             /// </remarks>
-            /// <seealso cref="PlayerActions" />
-            public void AddCallbacks(IPlayerActions instance)
+            /// <seealso cref="PlayersActions" />
+            public void AddCallbacks(IPlayersActions instance)
             {
-                if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
-                m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-                @Movement.started += instance.OnMovement;
-                @Movement.performed += instance.OnMovement;
-                @Movement.canceled += instance.OnMovement;
+                if (instance == null || m_Wrapper.m_PlayersActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_PlayersActionsCallbackInterfaces.Add(instance);
+                @LeftMovement.started += instance.OnLeftMovement;
+                @LeftMovement.performed += instance.OnLeftMovement;
+                @LeftMovement.canceled += instance.OnLeftMovement;
+                @RightMovement.started += instance.OnRightMovement;
+                @RightMovement.performed += instance.OnRightMovement;
+                @RightMovement.canceled += instance.OnRightMovement;
             }
 
             /// <summary>
@@ -279,21 +341,24 @@ namespace Pong.Domain.Inputs
             /// <remarks>
             /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
             /// </remarks>
-            /// <seealso cref="PlayerActions" />
-            private void UnregisterCallbacks(IPlayerActions instance)
+            /// <seealso cref="PlayersActions" />
+            private void UnregisterCallbacks(IPlayersActions instance)
             {
-                @Movement.started -= instance.OnMovement;
-                @Movement.performed -= instance.OnMovement;
-                @Movement.canceled -= instance.OnMovement;
+                @LeftMovement.started -= instance.OnLeftMovement;
+                @LeftMovement.performed -= instance.OnLeftMovement;
+                @LeftMovement.canceled -= instance.OnLeftMovement;
+                @RightMovement.started -= instance.OnRightMovement;
+                @RightMovement.performed -= instance.OnRightMovement;
+                @RightMovement.canceled -= instance.OnRightMovement;
             }
 
             /// <summary>
-            /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="PlayerActions.UnregisterCallbacks(IPlayerActions)" />.
+            /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="PlayersActions.UnregisterCallbacks(IPlayersActions)" />.
             /// </summary>
-            /// <seealso cref="PlayerActions.UnregisterCallbacks(IPlayerActions)" />
-            public void RemoveCallbacks(IPlayerActions instance)
+            /// <seealso cref="PlayersActions.UnregisterCallbacks(IPlayersActions)" />
+            public void RemoveCallbacks(IPlayersActions instance)
             {
-                if (m_Wrapper.m_PlayerActionsCallbackInterfaces.Remove(instance))
+                if (m_Wrapper.m_PlayersActionsCallbackInterfaces.Remove(instance))
                     UnregisterCallbacks(instance);
             }
 
@@ -303,35 +368,42 @@ namespace Pong.Domain.Inputs
             /// <remarks>
             /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
             /// </remarks>
-            /// <seealso cref="PlayerActions.AddCallbacks(IPlayerActions)" />
-            /// <seealso cref="PlayerActions.RemoveCallbacks(IPlayerActions)" />
-            /// <seealso cref="PlayerActions.UnregisterCallbacks(IPlayerActions)" />
-            public void SetCallbacks(IPlayerActions instance)
+            /// <seealso cref="PlayersActions.AddCallbacks(IPlayersActions)" />
+            /// <seealso cref="PlayersActions.RemoveCallbacks(IPlayersActions)" />
+            /// <seealso cref="PlayersActions.UnregisterCallbacks(IPlayersActions)" />
+            public void SetCallbacks(IPlayersActions instance)
             {
-                foreach (var item in m_Wrapper.m_PlayerActionsCallbackInterfaces)
+                foreach (var item in m_Wrapper.m_PlayersActionsCallbackInterfaces)
                     UnregisterCallbacks(item);
-                m_Wrapper.m_PlayerActionsCallbackInterfaces.Clear();
+                m_Wrapper.m_PlayersActionsCallbackInterfaces.Clear();
                 AddCallbacks(instance);
             }
         }
         /// <summary>
-        /// Provides a new <see cref="PlayerActions" /> instance referencing this action map.
+        /// Provides a new <see cref="PlayersActions" /> instance referencing this action map.
         /// </summary>
-        public PlayerActions @Player => new PlayerActions(this);
+        public PlayersActions @Players => new PlayersActions(this);
         /// <summary>
-        /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player" which allows adding and removing callbacks.
+        /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Players" which allows adding and removing callbacks.
         /// </summary>
-        /// <seealso cref="PlayerActions.AddCallbacks(IPlayerActions)" />
-        /// <seealso cref="PlayerActions.RemoveCallbacks(IPlayerActions)" />
-        public interface IPlayerActions
+        /// <seealso cref="PlayersActions.AddCallbacks(IPlayersActions)" />
+        /// <seealso cref="PlayersActions.RemoveCallbacks(IPlayersActions)" />
+        public interface IPlayersActions
         {
             /// <summary>
-            /// Method invoked when associated input action "Movement" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// Method invoked when associated input action "LeftMovement" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>
             /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-            void OnMovement(InputAction.CallbackContext context);
+            void OnLeftMovement(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "RightMovement" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnRightMovement(InputAction.CallbackContext context);
         }
     }
 }

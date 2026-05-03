@@ -1,14 +1,24 @@
 {
+    "version": 1,
     "name": "InputActions",
     "maps": [
         {
-            "name": "Player",
+            "name": "Players",
             "id": "84aacfba-928d-4901-b61c-0838d0c36ade",
             "actions": [
                 {
-                    "name": "Movement",
+                    "name": "LeftMovement",
                     "type": "Value",
                     "id": "9359c3ac-dbeb-44e7-a037-f967c7c4eae1",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "RightMovement",
+                    "type": "Value",
+                    "id": "0aa0381d-8e3c-477a-90dd-59437848f48c",
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
@@ -23,7 +33,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "LeftMovement",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -34,7 +44,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "LeftMovement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -45,7 +55,51 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "LeftMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "8e549d32-633b-48fa-8166-5d51565ec678",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Keyboard",
+                    "id": "35a36c9f-d81e-4910-af48-14280bb3adba",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightMovement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "587dc373-6948-403a-9ecd-4db190c0d90d",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "5a62a9d1-1404-4189-bffa-58144ab59f8d",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightMovement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }

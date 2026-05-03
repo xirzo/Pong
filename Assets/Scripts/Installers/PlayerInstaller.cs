@@ -15,6 +15,7 @@ namespace Pong.Installers
 		[SerializeField] private LoseVolume _loseVolume;
 
 		[Space] [SerializeField] private Transform _player;
+		[SerializeField] private PlayerSide _playerSide;
 
 		[SerializeField] private TextMeshProUGUI _textfield;
 
@@ -29,6 +30,7 @@ namespace Pong.Installers
 			_scoreCounter = new ScoreCounter();
 			Container.Bind<ScoreCounter>().FromInstance(_scoreCounter).AsSingle();
 			Container.BindInterfacesAndSelfTo<PlayerInput>().AsSingle();
+			Container.Bind<PlayerSide>().FromInstance(_playerSide).AsSingle();
 			_loseVolume.Construct(_scoreCounter);
 			Container.Bind<TextMeshProUGUI>().FromInstance(_textfield);
 			Container.BindInterfacesAndSelfTo<ScoreCounterUI>().AsSingle();

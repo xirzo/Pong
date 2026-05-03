@@ -13,14 +13,16 @@ namespace Pong.Domain.Movement
 		private readonly Transform _transform;
 		private readonly CameraBoundsCalculator _cameraBoundsCalculator;
 		private readonly PlayerInput _input;
+		private readonly PlayerSide _playerSide;
 		private float _movementInputY;
 
 		[Inject]
-		private PlayerMovement(CameraBoundsCalculator cameraBoundsCalculator, PlayerInput input, Transform transform)
+		private PlayerMovement(CameraBoundsCalculator cameraBoundsCalculator, PlayerInput input, Transform transform, PlayerSide playerSide)
 		{
 			_cameraBoundsCalculator = cameraBoundsCalculator;
 			_input = input;
 			_transform = transform;
+			_playerSide = playerSide;
 			_boundsY = _cameraBoundsCalculator.GetTopY();
 		}
 
@@ -32,7 +34,9 @@ namespace Pong.Domain.Movement
 
 		private void UpdateInput()
 		{
-			_movementInputY = _input.Actions.Player.Movement.ReadValue<float>();
+			_movementInputY = _playerSide == PlayerSide.Left
+				? _input.Actions.Players.LeftMovement.ReadValue<float>()
+				: _input.Actions.Players.RightMovement.ReadValue<float>();
 		}
 
 		private void Move()
